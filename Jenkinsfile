@@ -6,7 +6,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
-  serviceAccountName: jenkins-admin
+  serviceAccountName: default
   containers:
   - name: "jenkins-agent"
     image: docker:dind
