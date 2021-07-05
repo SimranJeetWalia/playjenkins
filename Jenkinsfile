@@ -18,6 +18,7 @@ spec:
 """
 }
   }
+  stages {
 
   stage('Build and push image with Container Builder') {
       steps {
@@ -26,4 +27,5 @@ spec:
         }
       }
     }
+}
 }
