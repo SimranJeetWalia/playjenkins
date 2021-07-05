@@ -1,46 +1,28 @@
 pipeline {
 
-  environment {
-    registry = "192.168.1.81:5000/justme/myweb"
-    dockerImage = ""
-  }
-
-  agent any
-
-  stages {
-
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/justmeandopensource/playjenkins.git'
-      }
-    }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-
-    stage('Push Image') {
-      steps{
-        script {
-          docker.withRegistry( "" ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-
-    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
-        }
-      }
-    }
-
-  }
-
+	agent {
+    kubernetes {
+      label 'sample-app'
+      defaultContainer 'jnlp'
+      yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+labels:
+  name: sample-app
+spec:
+  serviceAccountName: jenkins-admin
+  containers:
+  - name: sample-app
+    image: docker:dind
+"""
 }
+  }
+
+  stage('Build and push image with Container Builder') {
+      steps {
+        container('sample-app') {
+          sample-app = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+        }
+      }
+    }
