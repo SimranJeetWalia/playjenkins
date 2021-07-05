@@ -22,7 +22,7 @@ spec:
   stage('Build and push image with Container Builder') {
       steps {
         container('sample-app') {
-          sample-app = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+          sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
         }
       }
     }
