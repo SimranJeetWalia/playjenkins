@@ -2,18 +2,18 @@
 
 		agent {
 	    kubernetes {
-	      //label 'sample-app'
+	      label 'jenkins-slave'
 	      defaultContainer 'jnlp'
 	      yaml """
 	apiVersion: v1
 	kind: Pod
 	metadata:
 	labels:
-	  name: sample-app
+	  jenkins: slave
 	spec:
 	  serviceAccountName: jenkins-admin
 	  containers:
-	  - name: sample-app
+	  - name: jenkins-slave
 	    image: docker:dind
 	"""
 	}
