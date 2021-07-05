@@ -8,12 +8,12 @@ apiVersion: v1
 kind: Pod
 metadata:
 labels:
-	jenkins: slave
+  jenkins: slave
 spec:
-	serviceAccountName: jenkins-admin
-	containers:
-	- name: jenkins-slave
-	  image: docker:dind
+  serviceAccountName: jenkins-admin
+  containers:
+  - name: jenkins-slave
+	image: docker:dind
 """
 }
 }
