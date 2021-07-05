@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		kubernetes {
-		label 'kubernetes'
+		label 'master'
 		defaultContainer 'jnlp'
 		yaml """
 apiVersion: v1
@@ -29,5 +29,3 @@ stages {
 					}
 					}
 					}
-
-
