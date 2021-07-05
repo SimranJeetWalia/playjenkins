@@ -20,12 +20,14 @@ spec:
   }
   stages {
 
-  stage('Build and push image with Container Builder') {
+  stage('Build Container Builder') {
       steps {
         container('sample-app') {
-          sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+        	script{
+        		sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
         }
       }
     }
+}
 }
 }
