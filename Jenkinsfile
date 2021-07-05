@@ -13,7 +13,7 @@ spec:
   serviceAccountName: jenkins-admin
   containers:
   - name: jenkins-slave
-	image: docker:dind
+    image: docker:dind
 """
 }
 }
