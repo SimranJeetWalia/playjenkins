@@ -4,6 +4,9 @@ agent {
       yaml """\
         apiVersion: v1
         kind: Pod
+        metadata:
+          labels:
+            name: simranjeet
         spec:           
           containers:             
           - name: simranjeet
@@ -25,6 +28,3 @@ stages {
                                         }
                                         }
                                         }
-
-
-
