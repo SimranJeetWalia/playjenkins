@@ -39,5 +39,16 @@ stages {
             }
         }
         }
-        }
-        }
+  stage('Deploy to k8s cluster') {
+    steps {
+      container('radhey') {
+      script {
+        kubernetesDeploy configs: 'myweb.yaml', dockerCredentials: [[credentialsId: '01fb0ed4-abdb-4190-8873-8f1bb24ac598']], kubeConfig: [path: ''], kubeconfigId: '6c1a4939-baaa-4399-90f4-5bfecf1d84b7', secretName: '', secretNamespace: 'jenkins', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+      }
+      }
+    }
+  }
+  }
+  }
+        
+        
