@@ -1,6 +1,7 @@
 pipeline {
 	agent {
 		kubernetes {
+		label 'vinay'
 		yaml """
 apiVersion: v1
 kind: Pod
