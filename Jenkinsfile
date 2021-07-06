@@ -29,7 +29,7 @@ stages {
 					}
 					}
 					}
-	stage("Push image") {
+	stage('Push image') {
             steps {
                 script {
                 	container('radhey') {
