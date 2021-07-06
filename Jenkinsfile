@@ -12,8 +12,6 @@ spec:
   containers:
   - name: radhey
     image: docker:dind
-    securityContext:
-      privileged: true  
 """
 }
 }
