@@ -23,7 +23,7 @@ stages {
 		steps {
 			container('radhey') {
 				script{
-					sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
 					}
 					}
 					}
@@ -32,7 +32,7 @@ stages {
             steps {
                 script {
                 	container('radhey') {
-                		docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred') {
+                		docker.withRegistry('https://registry.hub.docker.com', '01fb0ed4-abdb-4190-8873-8f1bb24ac598') {
                 			sampleapp.push("${env.BUILD_ID}")
                     }
                 }
