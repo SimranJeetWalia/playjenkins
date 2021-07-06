@@ -28,7 +28,6 @@ stages {
 					}
 					}
 					}
-					}
 	stage('Push image') {
             steps {
                 script {
@@ -38,6 +37,7 @@ stages {
                     }
                 }
             }
+        }
         }
         }
         }
