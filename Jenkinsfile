@@ -29,4 +29,15 @@ stages {
 					}
 					}
 					}
-					}
+	stage("Push image") {
+            steps {
+                script {
+                	container('radhey') {
+                		docker.withRegistry('https://registry.hub.docker.com', 'DockerHubCred') {
+                			sampleapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
+        }
+        }
