@@ -6,19 +6,21 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    jenkins: slave
+    name: radhey
 spec:
   serviceAccountName: jenkins-admin
   containers:
-  - name: jenkins-slave
+  - name: radhey
     image: docker:dind
+    securityContext:
+      privileged: true  
 """
 }
 }
 stages {
 	stage('Build Container Builder') {
 		steps {
-			container('jenkins-slave') {
+			container('radhey') {
 				script{
 					sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
 					}
