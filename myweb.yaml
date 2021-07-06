@@ -11,8 +11,8 @@ spec:
     spec:
       containers:
       - name: sample-k8s-app
-        image: simranjeetwalia/sample-app:$BUILD_NUMBER
+        image: simranjeetwalia/sample-app:${env.BUILD_ID}
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: $KUBERNETES_SECRET_NAME
+      - name: ${env.KUBERNETES_SECRET_NAME}
