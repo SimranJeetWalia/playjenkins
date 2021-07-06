@@ -1,14 +1,18 @@
 pipeline {
 	agent {
 		kubernetes {
+		label 'jenkins-slave'
 		defaultContainer 'jnlp'
 		yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+labels:
+  jenkins: slave
 spec:
-  serviceAccountName: default
+  serviceAccountName: jenkins-admin
   containers:
-  - name: "jenkins-agent"
+  - name: jenkins-slave
     image: docker:dind
 """
 }
@@ -25,3 +29,5 @@ stages {
 					}
 					}
 					}
+
+
