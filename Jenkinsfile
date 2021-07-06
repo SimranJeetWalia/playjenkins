@@ -43,7 +43,7 @@ stages {
     steps {
       container('radhey') {
         script {
-          kubernetesDeploy(kubeconfigId: '47027e6b-c4ae-43c0-a916-a9b5e16f0c3e',
+          kubernetesDeploy(kubeconfigId: '723f7dfb-822b-42b8-9851-9fe1d11961a0',
                  configs: 'myweb.yaml',
                  enableConfigSubstitution: true,
                  secretNamespace: 'jenkins',
