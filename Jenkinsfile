@@ -6,7 +6,7 @@ apiVersion: v1
 kind: Pod
 metadata:
 labels:
-  jenkins: slave
+  jenkins: app
 spec:
   serviceAccountName: jenkins-admin
   containers:
