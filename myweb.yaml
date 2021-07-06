@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-k8s-deployment
@@ -10,9 +10,9 @@ spec:
         app: sample-k8s-app
     spec:
       containers:
-      - name: sample-k8s-app-container
+      - name: sample-k8s-app
         image: simranjeetwalia/sample-app:$BUILD_NUMBER
         ports:
-        - containerPort: 8080
+        - containerPort: 80
       imagePullSecrets:
       - name: $KUBERNETES_SECRET_NAME
