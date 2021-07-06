@@ -43,8 +43,7 @@ stages {
     steps {
       container('radhey') {
         script {
-          kubernetesDeploy(kubeconfigId: '6c1a4939-baaa-4399-90f4-5bfecf1d84b7',
-                 kubeConfig: [path: '/var/lib/jenkins/workspace/.kube/config'],
+          kubernetesDeploy(kubeconfigId: '47027e6b-c4ae-43c0-a916-a9b5e16f0c3e',
                  configs: 'myweb.yaml',
                  enableConfigSubstitution: true,
                  secretNamespace: 'jenkins',
