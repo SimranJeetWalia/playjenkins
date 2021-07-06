@@ -1,3 +1,4 @@
+pipeline {
 agent {
     kubernetes {
       label 'cd-jenkins-agent'
@@ -13,5 +14,20 @@ agent {
         """.stripIndent()
     }
   }
+stages {
+        stage('Build Container Builder') {
+                steps {
+                        container('jenkins-slave') {
+                                script{
+                                        sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+                                        }
+                                        }
+                                        }
+                                        }
+                                        }
+                                        }
+}
+
+
 
 
