@@ -10,7 +10,7 @@ labels:
 spec:
   serviceAccountName: jenkins-admin
   containers:
-  - name: jenkins-slave
+  - name: jenkins-app
     image: docker:dind
 """
 }
