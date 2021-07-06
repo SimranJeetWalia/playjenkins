@@ -46,6 +46,7 @@ stages {
           kubernetesDeploy(kubeconfigId: '723f7dfb-822b-42b8-9851-9fe1d11961a0',
                  configs: 'myweb.yaml',
                  enableConfigSubstitution: true,
+                 secretNamespace: 'default',
                  dockerCredentials: [
                         [credentialsId: '01fb0ed4-abdb-4190-8873-8f1bb24ac598', url: 'https://registry.hub.docker.com'],
                  ]
