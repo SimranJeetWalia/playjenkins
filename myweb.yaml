@@ -1,38 +1,18 @@
----
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  labels:
-    app: myweb
-  name: myweb
+  name: sample-k8s-deployment
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: myweb
   template:
     metadata:
       labels:
-        app: myweb
+        app: sample-k8s-app
     spec:
       containers:
-      - image: 192.168.1.81:5000/justme/myweb:1
-        imagePullPolicy: Always
-        name: myweb
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: myweb
-  name: myweb
-spec:
-  ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: myweb
-  type: NodePort
+      - name: sample-k8s-app-container
+        image: simranjeetwalia/sample-app:$BUILD_NUMBER)
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: $KUBERNETES_SECRET_NAME
