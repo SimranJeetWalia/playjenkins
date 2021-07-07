@@ -43,7 +43,7 @@ stages {
 	  steps {
 		  script {
 			  container('jnlp') {
-				  kubernetesDeploy(configs: "radhey.yml", kubeconfigId: "kubeconfig")
+				  kubernetesDeploy(configs: "radhey.yml")
 	      
       }
     }
