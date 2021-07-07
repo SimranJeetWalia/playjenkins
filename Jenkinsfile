@@ -42,7 +42,7 @@ stages {
   stage('Deploy App') {
 	  steps {
 		  script {
-			  container('jnlp') {
+			  container('radhey') {
 				  kubernetesDeploy(configs: "radhey.yml")
 	      
       }
