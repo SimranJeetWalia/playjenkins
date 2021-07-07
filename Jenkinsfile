@@ -28,17 +28,17 @@ stages {
 					}
 					}
 					}
-	stage('Push image') {
-            steps {
-                script {
-                	container('radhey') {
-                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
-                			sampleapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }
-        }
+//	stage('Push image') {
+//            steps {
+//                script {
+//                	container('radhey') {
+//                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
+//                			sampleapp.push("${env.BUILD_ID}")
+//                    }
+//                }
+//            }
+//        }
+//        }
   stage('Deploy App') {
 	  steps {
 		  script {
