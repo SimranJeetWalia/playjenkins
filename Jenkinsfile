@@ -41,7 +41,7 @@ stages {
         }
   stage('Deploy to k8s cluster') {
     steps {
-      kubernetesDeploy configs: 'myweb.yaml', kubeConfig: [path: ''], kubeconfigId: '723f7dfb-822b-42b8-9851-9fe1d11961a0', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
+      kubernetesDeploy configs: 'myweb.yaml', kubeConfig: [path: ''], kubeconfigId: 'k8s', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
         }
       }
     }
