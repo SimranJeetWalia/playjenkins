@@ -41,9 +41,7 @@ stages {
         }
   stage('Deploy App') {
       steps {
-        script {
-          kubernetesDeploy(configs: "radhey.yml", kubeconfigId: "k8s")
-        }
+        sh '${WORKSPACE}/radhey.yml | kubectl apply -f -'
       }
     }
     }
