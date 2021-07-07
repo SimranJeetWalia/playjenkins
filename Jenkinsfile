@@ -39,11 +39,13 @@ stages {
 //            }
 //        }
 //        }
-  stage('Deploy to k8s cluster') {
-    steps {
-      kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'k8s', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+  stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "radhey.yml", kubeconfigId: "k8s")
         }
       }
+    }
     }
   }
         
