@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		kubernetes {
-		//label 'vinay'
+		label 'vinay'
 		yaml """
 apiVersion: v1
 kind: Pod
@@ -32,7 +32,7 @@ stages {
             steps {
                 script {
                 	container('radhey') {
-                		docker.withRegistry('https://registry.hub.docker.com', '01fb0ed4-abdb-4190-8873-8f1bb24ac598') {
+                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
                 			sampleapp.push("${env.BUILD_ID}")
                     }
                 }
