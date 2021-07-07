@@ -9,7 +9,7 @@ metadata:
   labels:
     name: radhey
 spec:
-  serviceAccountName: kubernetes-admin
+  serviceAccountName: default
   containers:
   - name: radhey
     image: docker:dind
