@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-k8s-deployment
-  namespace: jenkins
+  namespace: default
 spec:
   replicas: 1
   template:
