@@ -30,14 +30,10 @@ stages {
 					}
 	stage('Depoy to K8s') {
 		steps {
-			container('jenkinsnode') {
-				script{
-					kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
+			script{
+				kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
 					}
 					}
 					}
-					}
-
-
 					}
 					}
