@@ -13,9 +13,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: kubectl
-    image: simranjeetwalia/kubectl:v1
-    securityContext:
-      privileged: true
+    image: ongdevops/kubectl:v1
 """
 }
 }
