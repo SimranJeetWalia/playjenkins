@@ -43,13 +43,13 @@ stages {
         //    }
        // }
        // }
-  stage ('Deploy to k8s cluster')
-    steps {
-      container('kubectl')
-        //sh "sed -i 's/#latest/${BUILD_NUMBER}/g' /home/ubuntu/nginx.yml"
-        sh 'kubectl create -f nginx.yml'
+	stage ('Deploy to k8s cluster') {
+		steps {
+			container('kubectl') {
+			//sh "sed -i 's/#latest/${BUILD_NUMBER}/g' /home/ubuntu/nginx.yml"
+			sh 'kubectl create -f ppp.yml'
     }
     }
   }
-        
-        
+}     
+}       
