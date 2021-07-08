@@ -17,7 +17,7 @@ spec:
     securityContext:
       privileged: true
   - name: kubectl
-    image: simranjeetwalia/kubectl:v1
+    image: ongdevops/kubectl:v1
 """
 }
 }
