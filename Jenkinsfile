@@ -14,6 +14,10 @@ spec:
     image: docker:dind
     securityContext:
       privileged: true
+  - name: kubectl
+    image: roffe/kubectl
+    command:
+    - tail -f /dev/null
 """
 }
 }
