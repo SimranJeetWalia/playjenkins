@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    run: nginx
-  name: nginx
+    name: nginx
+  namespace: jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: nginx
+      name: nginx
   template:
     metadata:
       labels:
-        run: nginx
+        name: nginx
     spec:
       containers:
       - image: nginx
