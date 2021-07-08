@@ -25,7 +25,7 @@ spec:
 stages {
   stage('Build Container Builder') {
     steps {
-      container('radhey') {
+      container('dockerdind') {
         script{
           sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
           }
