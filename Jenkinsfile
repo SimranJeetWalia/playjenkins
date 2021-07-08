@@ -47,7 +47,7 @@ stages {
     steps {
       container('kubectl')
         //sh "sed -i 's/#latest/${BUILD_NUMBER}/g' /home/ubuntu/nginx.yml"
-        sh 'kubectl create -f /home/ubuntu/nginx.yml'
+        sh 'kubectl create -f nginx.yml'
     }
     }
   }
