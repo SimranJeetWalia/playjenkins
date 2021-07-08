@@ -24,7 +24,9 @@ stages {
     steps {
       container('kubectl') {
         script {
-          sh 'kubectl create -f radhey.yml'
+          kubeconfig(credentialsId: 'kubeconfigsecret', serverUrl: 'https://172.31.23.124:6443') {
+            sh 'kubectl create -f radhey.yml'
+}
         }
       }
     }
