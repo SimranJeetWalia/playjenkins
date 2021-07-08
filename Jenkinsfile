@@ -6,8 +6,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 metadata:
-  labels:
-    name: jenkinsnode
+  name: jenkinsnode
 spec:
   serviceAccountName: jenkins-admin
   containers:
