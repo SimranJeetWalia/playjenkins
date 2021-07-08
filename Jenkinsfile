@@ -14,10 +14,6 @@ spec:
     image: docker:dind
     securityContext:
       privileged: true
-  - name: kubectl
-    image: roffe/kubectl
-    securityContext:
-      privileged: true
 """
 }
 }
