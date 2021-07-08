@@ -17,7 +17,7 @@ spec:
   - name: kubectl
     image: roffe/kubectl
     command:
-    - tail -f /dev/null
+    - /usr/bin/tail -f /dev/null
 """
 }
 }
