@@ -6,6 +6,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 metadata:
+  name: jenkinsnode
   labels:
     name: jenkinsnode
 spec:
