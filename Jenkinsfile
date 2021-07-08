@@ -17,7 +17,7 @@ spec:
     securityContext:
       privileged: true
   - name: kubectl
-    image: ongdevops/kubectl:v1
+    image: simranjeetwalia/kubectl:v1
 """
 }
 }
@@ -47,6 +47,7 @@ stages {
       container('kubectl') {
         script {
           kubeconfig(credentialsId: 'kubeconfigsecret', serverUrl: 'https://172.31.23.124:6443') {
+            sh "sed -i 's/sample-app:latest/sample-app:${env.BUILD_ID}/g' myweb.yaml"
             sh 'kubectl create -f myweb.yaml'
             }
         }
