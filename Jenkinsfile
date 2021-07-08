@@ -10,7 +10,7 @@ metadata:
   labels:
     name: jenkinsnode
 spec:
-  serviceAccountName: jenkins-admin
+  serviceAccountName: default
   containers:
   - name: kubectl
     image: ongdevops/kubectl:v1
