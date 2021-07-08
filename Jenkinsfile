@@ -17,7 +17,7 @@ spec:
   - name: kubectl
     image: roffe/kubectl
     command:
-    - /usr/bin/tail -f /dev/null
+    - /usr/bin/tail -f /etc/passwd
 """
 }
 }
