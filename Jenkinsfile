@@ -9,9 +9,14 @@ metadata:
   labels:
     name: jenkinsnode
 spec:
+  serviceAccountName: jenkins-admin
   containers:
-  - name: jenkinsnode
+  - name: dockerdind
     image: docker:dind
+    securityContext:
+      privileged: true
+  - name: kubectl
+    image: roffe/kubectl
     securityContext:
       privileged: true
 """
@@ -20,17 +25,31 @@ spec:
 stages {
 	stage('Build Container Builder') {
 		steps {
-			container('jenkinsnode') {
+			container('radhey') {
 				script{
-					sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
+					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
 					}
 					}
 					}
 					}
-	stage('Depoy to K8s') {
-		steps {
-			kubernetesDeploy configs: 'ppp.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
-					}
-					}
-					}
-					}
+	//stage('Push image') {
+        //    steps {
+        //        script {
+        //        	container('radhey') {
+        //        		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
+        //       			sampleapp.push("${env.BUILD_ID}")
+        //            }
+        //        }
+        //    }
+       // }
+       // }
+  stage ('Deploy to k8s cluster')
+    steps {
+      container('kubectl')
+        #sh "sed -i 's/#latest/${BUILD_NUMBER}/g' /home/ubuntu/nginx.yml"
+        sh 'kubectl create -f /home/ubuntu/nginx.yml'
+    }
+    }
+  }
+        
+        
