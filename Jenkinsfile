@@ -28,17 +28,17 @@ stages {
 					}
 					}
 					}
-	stage('Push image') {
-            steps {
-                script {
-                	container('radhey') {
-                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
-                			sampleapp.push("${env.BUILD_ID}")
-                    }
-                }
-            }
-        }
-        }
+	//stage('Push image') {
+        //    steps {
+        //        script {
+        //        	container('radhey') {
+        //        		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
+        //        			sampleapp.push("${env.BUILD_ID}")
+        //            }
+        //        }
+        //    }
+        //}
+        //}
   stage('Deploy to k8s cluster') {
     steps {
       kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
