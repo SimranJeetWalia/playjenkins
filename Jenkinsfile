@@ -9,7 +9,6 @@ metadata:
   labels:
     name: jenkinsnode
 spec:
-  serviceAccountName: jenkins-admin
   containers:
   - name: jenkinsnode
     image: docker:dind
