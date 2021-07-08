@@ -1,44 +1,50 @@
 pipeline {
-  agent {
-    kubernetes {
-    label 'jenkinsnode'
-    yaml """
+	agent {
+		kubernetes {
+		label 'vinay'
+		yaml """
 apiVersion: v1
 kind: Pod
 metadata:
-  name: jenkinsnode
+  labels:
+    name: radhey
 spec:
   serviceAccountName: jenkins-admin
   containers:
-  - name: dockerdind
+  - name: radhey
     image: docker:dind
     securityContext:
       privileged: true
-  - name: kubectl
-    image: roffe/kubectl
-    command:
-    - /usr/bin/tail -f /etc/passwd
 """
 }
 }
 stages {
-  stage('Build Container Builder') {
+	stage('Build Container Builder') {
+		steps {
+			container('radhey') {
+				script{
+					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
+					}
+					}
+					}
+					}
+	stage('Push image') {
+            steps {
+                script {
+                	container('radhey') {
+                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
+                			sampleapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
+        }
+  stage('Deploy to k8s cluster') {
     steps {
-      container('radhey') {
-        script{
-          sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
-          }
-          }
-          }
-          }
-  stage('Deploy to k8s') {
-    steps {
-      container('kubectl') {
-        script {
-          sh 'kubectl create -f ppp.yml'
+      kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
         }
       }
     }
   }
-  }
-  }
+        
+        
