@@ -1,50 +1,44 @@
 pipeline {
-	agent {
-		kubernetes {
-		label 'vinay'
-		yaml """
+  agent {
+    kubernetes {
+    label 'jenkinsnode'
+    yaml """
 apiVersion: v1
 kind: Pod
 metadata:
-  labels:
-    name: radhey
+  name: jenkinsnode
 spec:
-  serviceAccountName: default
+  serviceAccountName: jenkins-admin
   containers:
-  - name: radhey
+  - name: dockerdind
     image: docker:dind
+    securityContext:
+      privileged: true
+  - name: kubectl
+    image: simranjeetwalia/kubectl:v1
     securityContext:
       privileged: true
 """
 }
 }
 stages {
-	stage('Build Container Builder') {
-		steps {
-			container('radhey') {
-				script{
-					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
-					}
-					}
-					}
-					}
-	//stage('Push image') {
-        //    steps {
-        //        script {
-        //        	container('radhey') {
-        //        		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
-        //        			sampleapp.push("${env.BUILD_ID}")
-        //            }
-        //        }
-        //    }
-        //}
-        //}
-  stage('Deploy to k8s cluster') {
+  stage('Build Container Builder') {
     steps {
-      kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
+      container('radhey') {
+        script{
+          sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
+          }
+          }
+          }
+          }
+  stage('Deploy to k8s') {
+    steps {
+      container('kubectl') {
+        script {
+          sh 'kubectl create -f radhey.yml'
         }
       }
     }
   }
-        
-        
+  }
+  }
