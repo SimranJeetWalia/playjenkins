@@ -1,8 +1,8 @@
 pipeline {
-	agent {
-		kubernetes {
-		label 'jenkinsnode'
-		yaml """
+  agent {
+    kubernetes {
+    label 'jenkinsnode'
+    yaml """
 apiVersion: v1
 kind: Pod
 metadata:
@@ -23,33 +23,23 @@ spec:
 }
 }
 stages {
-	stage('Build Container Builder') {
-		steps {
-			container('radhey') {
-				script{
-					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
-					}
-					}
-					}
-					}
-	//stage('Push image') {
-        //    steps {
-        //        script {
-        //        	container('radhey') {
-        //        		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
-        //       			sampleapp.push("${env.BUILD_ID}")
-        //            }
-        //        }
-        //    }
-       // }
-       // }
-	stage ('Deploy to k8s cluster') {
-		steps {
-			container('kubectl') {
-			//sh "sed -i 's/#latest/${BUILD_NUMBER}/g' /home/ubuntu/nginx.yml"
-			sh 'kubectl create -f ppp.yml'
-    }
+  stage('Build Container Builder') {
+    steps {
+      container('radhey') {
+        script{
+          sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
+          }
+          }
+          }
+          }
+  stage('Deploy to k8s') {
+    steps {
+      container('kubectl') {
+        script {
+          sh 'kubectl create -f ppp.yml'
+        }
+      }
     }
   }
-}     
-}       
+  }
+  }
