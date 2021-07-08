@@ -29,7 +29,7 @@ stages {
 					}
 	stage('Depoy to K8s') {
 		steps {
-			kubernetesDeploy configs: 'radhey.yal', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
+			kubernetesDeploy configs: 'radhey.yml', kubeConfig: [path: ''], kubeconfigId: 'kubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://172.31.23.124:6443']
 					}
 					}
 					}
