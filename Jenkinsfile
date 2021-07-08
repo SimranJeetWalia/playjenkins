@@ -1,17 +1,17 @@
 pipeline {
 	agent {
 		kubernetes {
-		label 'vinay'
+		label 'jenkinsnode'
 		yaml """
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    name: radhey
+    name: jenkinsnode
 spec:
-  serviceAccountName: default
+  serviceAccountName: jenkins-admin
   containers:
-  - name: radhey
+  - name: jenkinsnode
     image: docker:dind
     securityContext:
       privileged: true
@@ -21,33 +21,12 @@ spec:
 stages {
 	stage('Build Container Builder') {
 		steps {
-			container('radhey') {
+			container('jenkinsnode') {
 				script{
-					sampleapp = docker.build("simranjeetwalia/sample-app:${env.BUILD_ID}")
+					sampleapp = docker.build("simranjeetwalia/sample-app:${env.$BUILD_ID}")
 					}
 					}
 					}
 					}
-//	stage('Push image') {
-//            steps {
-//                script {
-//                	container('radhey') {
-//                		docker.withRegistry('https://registry.hub.docker.com', 'dockerhubcred') {
-//                			sampleapp.push("${env.BUILD_ID}")
-//                    }
-//                }
-//            }
-//        }
-//        }
-  stage('Deploy App') {
-	  steps {
-		  script {
-			  container('radhey') {
-				  kubernetesDeploy(configs: "radhey.yml", kubeconfigId: "kubeconfig")
-	      
-      }
-    }
-    }
-  }
-}
-}
+					}
+					}
